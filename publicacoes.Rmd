@@ -1,0 +1,38 @@
+---
+title: Anais do evento
+output:
+  html_document:
+    toc: FALSE
+    css:
+      - CSS/responsive/css
+---
+
+<!--install and/or load all R packages-->
+```{r setup, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', out.width = "100%", results = "hide"}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = 'center',
+  results = "asis",
+  include = TRUE,
+  out.width = "100%",
+  knitr.kable.NA = '--',
+  knitr.table.format = "html"
+)
+```
+
+
+<br>
+
+<center>
+
+<a style="font-size: 3rem; border: solid; border-radius: 10px; padding: 10px; background-color: black" href="https://doi.org/10.17605/OSF.IO/JEM2B">10.17605/OSF.IO/JEM2B</a>
+
+</center>
+
+<br>
+
+<iframe src="2025/Anais_IX_Simpósio_Paredesportivo_Carioca.pdf" style="width:100%; height:600px; border:2px solid black;"></iframe>
+
+<br>

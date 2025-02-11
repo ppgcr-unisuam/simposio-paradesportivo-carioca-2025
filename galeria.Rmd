@@ -1,0 +1,56 @@
+---
+title: Galeria
+output:
+  html_document:
+    toc: FALSE
+    css:
+      - CSS/narrow-margins.css
+      - CSS/responsive/css
+---
+
+<!--install and/or load all R packages-->
+```{r setup, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', out.width = "100%", results = "hide"}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = 'center',
+  results = "asis",
+  include = TRUE,
+  out.width = "100%",
+  knitr.kable.NA = '',
+  knitr.table.format = "html"
+)
+```
+
+<br>
+
+```{css}
+.item img {
+  width:25%
+}
+```
+
+```{r galeria-carousel, out.width="50%", eval = !sjmisc::is_empty(list.files("2025/Fotos/"))}
+library("dplyr")
+
+# carousel
+bsplus::bs_carousel(id = "projetos-carousel",
+            use_indicators = FALSE,
+            use_controls = TRUE) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/01.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/02.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/03.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/04.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/05.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/06.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/07.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/08.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/09.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/10.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/11.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/12.jpg")) %>%
+  bsplus::bs_append(content = bsplus::bs_carousel_image(src = "2025/Fotos/13.jpg"))
+
+cat('\n\n')
+```

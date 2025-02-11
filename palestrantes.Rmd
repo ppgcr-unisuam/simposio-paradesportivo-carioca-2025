@@ -1,0 +1,105 @@
+---
+title: Palestrantes
+output:
+  html_document:
+    toc: TRUE
+    css:
+      - CSS/responsive/css
+---
+
+<!--install and/or load all R packages-->
+```{r setup, include = FALSE, echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', out.width = "100%", results = "hide"}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = 'center',
+  results = "asis",
+  include = TRUE,
+  out.width = "100%",
+  knitr.kable.NA = '',
+  knitr.table.format = "html"
+)
+```
+
+<br>
+
+```{r palestrantes, eval = file.exists("2025/Palestrantes.xlsx"), echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', out.width = "100%", results = "asis"}
+library("dplyr")
+
+# initialize all sheets
+abas <- readxl::excel_sheets("2025/Palestrantes.xlsx")
+
+# display each sheet in a tab
+for (j in 1:length(abas)) {
+  palestrantes.raw <-
+    readxl::read_excel("2025/Palestrantes.xlsx",
+                       sheet = abas[j],
+                       col_types = c("text"))
+  # replace the link by a tag
+  fotos <- matrix(NA, nrow = dim(palestrantes.raw)[1])
+  colnames(fotos) <- "Abrir"
+  # add hyperlinks
+  for (i in 1:dim(palestrantes.raw)[1]) {
+    if (!is.na(palestrantes.raw[i, 1])) {
+      fotos[i] <-
+        paste0('<img src=\"',
+               file.path("2025", "Palestrantes", palestrantes.raw[i, 1]),
+               '\" height=\"100px;\" align=\"center\"/>')
+    }
+  }
+  palestrantes.raw[, 1] <- fotos
+  
+  cat('\n\n<!-- -->\n\n')
+  cat('<div class = "row"><div class = "col-md-2">')
+  cat('<center>\n')
+  cat('\n\n<!-- -->\n\n')
+  # print image
+  cat(as.character(palestrantes.raw[1, 1]))
+  cat('\n\n<!-- -->\n\n')
+  cat('\n</center>')
+  cat('</div>')
+
+  cat('<div class = "col-md-10">')
+  cat('\n\n<!-- -->\n\n')
+  # print name
+  cat('\n\n<!-- -->\n\n')
+  cat(paste0('## **', palestrantes.raw[1, 2], '**'))
+  cat('\n\n<!-- -->\n\n')
+  # print affiliation
+  cat(paste0('### *', palestrantes.raw[1, 3], '*'))
+  cat('\n\n<!-- -->\n\n')
+  cat('</div></div>')
+  
+  # print mini CV
+  print(
+    knitr::kable(
+      palestrantes.raw[, 4],
+      align = "l",
+      format = "html",
+      escape = FALSE
+    ) %>%
+      kableExtra::kable_styling(
+        bootstrap_options = c("condensed", "responsive"),
+        full_width = T,
+        position = "center"
+      ) %>%
+      kableExtra::row_spec(
+        0,
+        background = "grey",
+        bold = TRUE,
+        color = "white"
+      ),
+    row.names = NULL
+  )
+
+  # print end of tab rows
+  cat('<br>')
+  cat(paste0('<a style=\"float:right\" href=\"#top\"><b>Início', fontawesome::fa("circle-up"), '</b></a>'))
+  cat('<br>')
+  cat('<hr style=\"height:2px;border-width:0;color:#2C3E50;background-color:#2C3E50\">')
+  cat('<br>')
+}
+```
+
+<br>

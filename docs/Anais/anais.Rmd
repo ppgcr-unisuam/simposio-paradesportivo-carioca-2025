@@ -1,0 +1,90 @@
+---
+title: "Anais da VIII Simpósio Paradesportivo Carioca"
+output: 
+  word_document:
+    reference_doc: "template/template.docx"
+---
+
+\newpage
+
+#  **Comissão Organizadora**
+
+- Profa. Dra. Patrícia dos Santos Vigário (UNISUAM)
+- Profa. MSc. Júlia Lemos (UNISUAM)
+- Prof. Carlos Alberto Cordella (UNISUAM)
+- Prof. Mateus Miccichelli (UNISUAM)
+- Prof. Aroldo Caio de Araújo Barros (UNISUAM)
+
+<br>
+
+\newpage
+
+# **Comissão Científica**
+
+- Prof. Dr. Agnaldo José Lopes (UNISUAM)
+- Profa. Dra. Angela Nogueira Neves (EsEFEx)
+- Prof. Dr. Arthur de Sá Ferreira (UNISUAM)
+- Prof. Dr. Diego Viana (UFRJ)
+- Prof. Dr. Estevão Monteiro (UNISUAM)
+- Prof. Dr. Fábio Vieira dos Anjos (UNISUAM)
+- Prof. Dr. Igor Ramathur Telles de Jesus (UNISUAM)
+- Prof. Ms. Júlia Lemos (UNISUAM)
+- Profa. Dra. Laura Alice Santos Oliveira (UNISUAM)
+- Prof. Dr. Leandro Alberto Calazans Nogueira (UNISUAM)
+- Profa. Dra. Luciana Crepaldi Lunkes (UNISUAM)
+- Prof. Dr. Luis Felipe da Fonseca Reis (UNISUAM)
+- Profa. Dra. Míriam Raquel Meira Mainenti (EsEFEx)
+- Prof. Dr. Ney Armando de Mello Meziat Filho (UNISUAM)
+- Prof. Dr. Rafael Mocarzel (Univassouras)
+- Prof. Dr. Renato Santos de Almeida (UNISUAM)
+- Prof. Dr. Thiago Lemos de Carvalho (UNISUAM)
+
+
+\newpage
+
+
+```{r resumos, echo = FALSE, results = "asis"}
+# Read xlsx file
+resumos <- readxl::read_xlsx(
+  "Submissao de Tema Livre - VIII Simposio Paradesportivo Carioca (respostas) (1).xlsx"
+) |> as.data.frame(check.names = FALSE)
+
+# select aprovados
+resumos <- resumos[complete.cases(resumos), ]
+
+# Print resumos
+for (i in 1:nrow(resumos)) {
+  cat(paste0("# **", toupper(resumos$`Título do trabalho`[i]), "**"))
+  cat("\n\n")
+  cat(toupper(resumos$`Nome completo do (s) autor (es)`[i]))
+  cat("\n\n")
+  cat("*E-mail autor principal: *", resumos$`E-mail do autor principal`[i])
+  cat("\n\n")
+  cat("*Instituição*: ", resumos$`Afiliação do (s) autor (es)`[i])
+  cat("\n\n")
+  cat("*Palavras-chave:* ", resumos$`Palavras-chave (3 a 5, separadas por ponto e vírgula)`[i])
+  cat("\n\n")
+  cat("# **Introdução**\n\n")
+  cat(as.character(resumos$Introdução[i]))
+  cat("\n\n")
+  cat("# **Objetivo**\n\n")
+  cat(as.character(resumos$Objetivo[i]))
+  cat("\n\n")
+  cat("# **Metodologia**\n\n")
+  cat(as.character(resumos$Métodos[i]))
+  cat("\n\n")
+  cat("# **Resultados**\n\n")
+  cat(as.character(resumos$Resultados[i]))
+  cat("\n\n")
+  cat("# **Conclusão**\n\n")
+  cat(as.character(resumos$Conclusão[i]))
+  cat("\n\n")
+  cat("# Aspectos éticos\n\n")
+  cat(as.character(resumos$`Questões éticas`[i]))
+  cat("\n\n")
+  cat("# Financiamento\n\n")
+  cat(as.character(resumos$`Financiamento (caso não haja financiamento, preencher com "não se aplica"`[i]))
+  cat("\n\n")
+  cat("\\newpage\n")
+}
+```
